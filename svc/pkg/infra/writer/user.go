@@ -40,9 +40,9 @@ func (u User) Create(ctx context.Context, model user.User) error {
 			EncryptedAccessToken:  string(model.Line.EncryptedAccessToken),
 			EncryptedRefreshToken: string(model.Line.EncryptedRefreshToken),
 		},
-		UserDashboard: entity.UserDashboard{
-			Grants: model.Dashboard.Grants,
-		},
+		//UserDashboard: entity.UserDashboard{
+		//	Grants: model.Dashboard.Grants,
+		//},
 	}
 	//NOTE: Create fails if the document already exists
 	_, err := u.collection.Doc(strconv.FormatInt(int64(model.ID), 10)).
