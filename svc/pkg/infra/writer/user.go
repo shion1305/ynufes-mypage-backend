@@ -36,9 +36,9 @@ func (u User) Create(ctx context.Context, model user.User) error {
 			Type:          int(model.Detail.Type),
 		},
 		Line: entity.Line{
-			LineServiceID:         string(model.Line.LineServiceID),
-			EncryptedAccessToken:  string(model.Line.EncryptedAccessToken),
-			EncryptedRefreshToken: string(model.Line.EncryptedRefreshToken),
+			LineServiceID: string(model.Line.LineServiceID),
+			//EncryptedAccessToken:  string(model.Line.EncryptedAccessToken),
+			//EncryptedRefreshToken: string(model.Line.EncryptedRefreshToken),
 		},
 		//UserDashboard: entity.UserDashboard{
 		//	Grants: model.Dashboard.Grants,
