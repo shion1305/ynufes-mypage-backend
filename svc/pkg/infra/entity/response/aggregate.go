@@ -48,11 +48,24 @@ func (r Response) ToModel() (*response.Response, error) {
 		return nil, err
 	}
 
-	return &response.Response{
-		ID:       r.ID,
-		OrgID:    orgID,
-		AuthorID: authorID,
-		FormID:   formID,
-		Data:     r.Data,
-	}, nil
+	data := make(map[id.QuestionID]response.QuestionResponse, len(r.QuestionResponses))
+	for k, v := range r.QuestionResponses {
+		qid, err := identity.ImportID(k)
+		if err != nil {
+			return nil, err
+		}
+		data[qid] = response.QuestionResponse{
+			QuestionID:   qid,
+			ResponseData: v.ResponseData,
+		}
+	}
+
+	resp := response.NewResponse(
+		r.ID,
+		orgID,
+		authorID,
+		formID,
+		data,
+	)
+	return &resp, nil
 }

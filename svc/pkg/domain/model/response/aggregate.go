@@ -2,16 +2,18 @@ package response
 
 import (
 	"ynufes-mypage-backend/svc/pkg/domain/model/id"
-	"ynufes-mypage-backend/svc/pkg/domain/model/util"
 )
 
 type (
 	Response struct {
-		ID       ID
+		ID       id.ResponseID
 		OrgID    id.OrgID
 		AuthorID id.UserID
 		FormID   id.FormID
-		Data     map[string]interface{}
+		Data     map[id.QuestionID]QuestionResponse
 	}
-	ID util.ID
+	QuestionResponse struct {
+		QuestionID   id.QuestionID
+		ResponseData map[string]interface{}
+	}
 )
