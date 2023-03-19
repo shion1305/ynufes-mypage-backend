@@ -8,22 +8,33 @@ import (
 
 const ResponseRootName = "Responses"
 
-type (
-	Response struct {
-		ID       id.UserID              `json:"-"`
-		OrgID    int64                  `json:"org_id"`
-		AuthorID int64                  `json:"author_id"`
-		FormID   int64                  `json:"form_id"`
-		Data     map[string]interface{} `json:"data"`
-	}
-)
+type Response struct {
+	ID       id.UserID              `json:"-"`
+	OrgID    string                 `json:"org_id"`
+	AuthorID string                 `json:"author_id"`
+	FormID   string                 `json:"form_id"`
+	Data     map[string]interface{} `json:"data"`
+}
 
 func (r Response) ToModel() (*response.Response, error) {
+	orgID, err := identity.ImportID(r.OrgID)
+	if err != nil {
+		return nil, err
+	}
+	authorID, err := identity.ImportID(r.AuthorID)
+	if err != nil {
+		return nil, err
+	}
+	formID, err := identity.ImportID(r.FormID)
+	if err != nil {
+		return nil, err
+	}
+
 	return &response.Response{
 		ID:       r.ID,
-		OrgID:    identity.NewID(r.OrgID),
-		AuthorID: identity.NewID(r.AuthorID),
-		FormID:   identity.NewID(r.FormID),
+		OrgID:    orgID,
+		AuthorID: authorID,
+		FormID:   formID,
 		Data:     r.Data,
 	}, nil
 }
