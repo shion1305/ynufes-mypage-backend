@@ -15,7 +15,7 @@ type Response struct {
 	ref *db.Ref
 }
 
-func NewResponse(f firebase.Firebase) Response {
+func NewResponse(f *firebase.Firebase) Response {
 	return Response{
 		ref: f.Client(entity.ResponseRootName),
 	}

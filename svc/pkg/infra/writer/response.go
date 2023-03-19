@@ -4,6 +4,7 @@ import (
 	"context"
 	"firebase.google.com/go/v4/db"
 	"fmt"
+	"ynufes-mypage-backend/pkg/firebase"
 	"ynufes-mypage-backend/pkg/identity"
 	"ynufes-mypage-backend/pkg/typecast"
 	"ynufes-mypage-backend/svc/pkg/domain/model/response"
@@ -15,9 +16,9 @@ type Response struct {
 	ref *db.Ref
 }
 
-func NewResponse(f *db.Ref) Response {
+func NewResponse(f *firebase.Firebase) Response {
 	return Response{
-		ref: f,
+		ref: f.Client(entity.ResponseRootName),
 	}
 }
 
