@@ -85,3 +85,11 @@ func (repo Repository) NewLineCommand() command.Line {
 func (repo Repository) NewLineQuery() query.Line {
 	return reader.NewLine(repo.fb)
 }
+
+func (repo Repository) NewResponseCommand() command.Response {
+	return writer.NewResponse(repo.fb)
+}
+
+func (repo Repository) NewResponseQuery() query.Response {
+	return reader.NewResponse(repo.fb)
+}
