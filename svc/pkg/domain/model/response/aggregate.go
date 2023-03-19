@@ -17,3 +17,22 @@ type (
 		ResponseData map[string]interface{}
 	}
 )
+
+func NewResponse(
+	rid id.ResponseID,
+	oid id.OrgID,
+	aid id.UserID,
+	fid id.FormID,
+	data map[id.QuestionID]QuestionResponse,
+) Response {
+	return Response{
+		rid, oid, aid, fid, data,
+	}
+}
+
+func NewQuestionResponse(
+	qid id.QuestionID,
+	data map[string]interface{},
+) QuestionResponse {
+	return QuestionResponse{qid, data}
+}

@@ -34,6 +34,12 @@ func NewResponse(
 	}
 }
 
+func NewQuestionResponse(
+	qid id.QuestionID, data map[string]interface{},
+) QuestionResponse {
+	return QuestionResponse{qid, data}
+}
+
 func (r Response) ToModel() (*response.Response, error) {
 	orgID, err := identity.ImportID(r.OrgID)
 	if err != nil {
