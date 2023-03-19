@@ -8,12 +8,30 @@ import (
 
 const ResponseRootName = "Responses"
 
-type Response struct {
-	ID       id.UserID              `json:"-"`
-	OrgID    string                 `json:"org_id"`
-	AuthorID string                 `json:"author_id"`
-	FormID   string                 `json:"form_id"`
-	Data     map[string]interface{} `json:"data"`
+type (
+	Response struct {
+		ID                id.ResponseID               `json:"-"`
+		OrgID             string                      `json:"org_id"`
+		AuthorID          string                      `json:"author_id"`
+		FormID            string                      `json:"form_id"`
+		QuestionResponses map[string]QuestionResponse `json:"questions"`
+	}
+	QuestionResponse struct {
+		QuestionID   id.QuestionID          `json:"-"`
+		ResponseData map[string]interface{} `json:"data"`
+	}
+)
+
+func NewResponse(
+	rid id.ResponseID,
+	oid string,
+	aid string,
+	fid string,
+	data map[string]QuestionResponse,
+) Response {
+	return Response{
+		rid, oid, aid, fid, data,
+	}
 }
 
 func (r Response) ToModel() (*response.Response, error) {

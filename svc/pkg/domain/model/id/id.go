@@ -9,6 +9,7 @@ type (
 	FormID     util.ID
 	SectionID  util.ID
 	QuestionID util.ID
+	ResponseID util.ID
 	OrgIDs     []OrgID
 )
 
